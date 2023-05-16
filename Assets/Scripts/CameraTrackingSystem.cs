@@ -9,12 +9,15 @@ public class CameraTrackingSystem : MonoBehaviour
     public Vector3 offset;
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
+        /*
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
           transform.position = smoothedPosition;
 
         transform.LookAt(target);
+        */
+        transform.position = target.position + offset;
     }
 }
