@@ -192,37 +192,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e632c0e8ffb3c42866671a7193491a, type: 3}
---- !u!1 &40934619
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 40934620}
-  m_Layer: 0
-  m_Name: Muzzle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &40934620
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40934619}
-  m_LocalRotation: {x: -0.19852507, y: -0.9732518, z: -0.11409742, w: 0.018724293}
-  m_LocalPosition: {x: -15.535696, y: 1.5771794, z: -1.7636092}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &111008030
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731616340}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.61, y: 1.49, z: -16.483772}
+  m_LocalPosition: {x: -6.61, y: 3.55, z: -16.483772}
   m_LocalScale: {x: 13.37, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -804,15 +773,71 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 64
-  targetTransform: {fileID: 602170891}
   mouseAimMask:
     serializedVersion: 2
     m_Bits: 128
   bulletPrefab: {fileID: 3714936309755222211, guid: 99833a555d96ba04e9172a1e056371d5, type: 3}
+  targetTransform: {fileID: 602170891}
   muzzleTransform: {fileID: 1905171462}
   speed: 2
-  groundDistance: 0.2
   dashDistance: 5
+  groundDistance: 0.2
+  recoilCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.020832062
+      value: 0
+      inSlope: 1.7655452
+      outSlope: 1.7655452
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.013196617
+      value: 0.060079172
+      inSlope: 0.8054192
+      outSlope: 0.8054192
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.27265716
+      value: 0.019938868
+      inSlope: -0.09660713
+      outSlope: -0.09660713
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.67350817
+      value: 0.0045031086
+      inSlope: -0.02614994
+      outSlope: -0.02614994
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.013792408
+      outSlope: -0.013792408
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilTimer: 0
+  recoilDuration: 0.25
+  recoilMaxrotation: 45
+  rightLowerArm: {fileID: 1717207244}
+  rightHand: {fileID: 2020619280}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5966416b8e2576409c4c7dc99c6cb4c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.42
+      value: -11.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5966416b8e2576409c4c7dc99c6cb4c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1223,7 +1248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5966416b8e2576409c4c7dc99c6cb4c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.51
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5966416b8e2576409c4c7dc99c6cb4c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1271,6 +1296,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 597492a01135c8b4ea0debd4737a26bc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5966416b8e2576409c4c7dc99c6cb4c, type: 3}
+--- !u!4 &1717207244 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -135939154369228517, guid: 7dad32d1733361f46a90643fbabee724, type: 3}
+  m_PrefabInstance: {fileID: 1429861736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1827668737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1432,15 +1462,26 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 64
-  targetTransform: {fileID: 0}
   mouseAimMask:
     serializedVersion: 2
     m_Bits: 128
   bulletPrefab: {fileID: 4502413942370059445, guid: e3274899d40249a47b461adc417458c8, type: 3}
+  targetTransform: {fileID: 0}
   muzzleTransform: {fileID: 0}
   speed: 2
-  groundDistance: 0.2
   dashDistance: 5
+  groundDistance: 0.2
+  recoilCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilTimer: 0
+  recoilDuration: 0.25
+  recoilMaxrotation: 45
+  rightLowerArm: {fileID: 0}
+  rightHand: {fileID: 0}
 --- !u!1 &2126958603
 GameObject:
   m_ObjectHideFlags: 0

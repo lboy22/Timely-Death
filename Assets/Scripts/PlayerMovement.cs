@@ -5,34 +5,36 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public LayerMask Ground;
-    public Transform targetTransform;
     public LayerMask mouseAimMask;
     public GameObject bulletPrefab;
+    public Transform targetTransform;
     public Transform muzzleTransform;
 
-    private Animator animationsPlayer;
-    [SerializeField] float speed = 2f;
-    //float JumpHeight = 3f;
-    [SerializeField] float groundDistance = 0.2f;
-    [SerializeField] float dashDistance = 5f;
-    
 
+    //float JumpHeight = 3f;
+    private Animator animationsPlayer;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float dashDistance = 5f;
+    [SerializeField] private float groundDistance = 0.2f;
+
+    private bool aimState;
     private Rigidbody body;
-    private Vector3 inputs = Vector3.zero;
+    private Camera mainCamera;
     private bool isGrounded = true;
     private Transform groundChecker;
-    private Camera mainCamera;
-    private bool aimState;
-    
-    
+    private Vector3 inputs = Vector3.zero;
+
+    [SerializeField] private AnimationCurve recoilCurve;
+    public float recoilTimer, recoilDuration = .25f, recoilMaxrotation = 45f;
+    [SerializeField] private Transform rightLowerArm, rightHand;
 
 
     void Start()
     {
+        mainCamera = Camera.main;
         body = GetComponent<Rigidbody>();
         groundChecker = transform.GetChild(0);
         animationsPlayer = GetComponent<Animator>();
-        mainCamera = Camera.main;
     }
 
     void Update()
@@ -56,6 +58,24 @@ public class PlayerMovement : MonoBehaviour
     {
         body.MovePosition(body.position + inputs * speed * Time.fixedDeltaTime);
         //body.MoveRotation(Quaternion.Euler(new Vector3(0, 90 * Mathf.Sign(targetTransform.position.x - transform.position.x), 0)));
+    }
+
+    private void LateUpdate()
+    {
+        //
+        if(recoilTimer < 0)
+        {
+            return;
+        }
+        float curveTime = (Time.time - recoilTimer) / (recoilDuration);
+        if(curveTime > 1)
+        {
+            recoilTimer = -1;
+        }
+        else
+        {
+            rightLowerArm.Rotate(Vector3.forward, recoilCurve.Evaluate(curveTime) * recoilMaxrotation, Space.Self);
+        }
     }
 
     void Movement()
@@ -95,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         /*
-         * 
+         * Byllet should follow a random path between 75 and -75 degrees.
          */
         else if(!aimState && Input.GetButtonDown("Fire1"))
         {
@@ -105,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Fire()
     {
+        recoilTimer = Time.time;
         var go = Instantiate(bulletPrefab);
         go.transform.position = muzzleTransform.position;
         var bullet = go.GetComponent<Bullet>();
@@ -160,6 +181,10 @@ public class PlayerMovement : MonoBehaviour
         animationsPlayer.SetLookAtPosition(targetTransform.position);
     }
 
+    /*
+     * Decide whether to make sprint a set of if statements, or a separate method.
+     * Make it so instead of a dash this function acts as a sprint.
+     */
     void Dash()
     {
         if (Input.GetButtonDown("Dash"))
@@ -172,8 +197,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Dash pressed. - " + dashDistance);
         }
 
-     /*
-        
+     /*       
          * Make player speed increase the longer the designated key is pressed,
          * or as long as there's stamina available (system yet to be immplemented).
          
@@ -191,10 +215,5 @@ public class PlayerMovement : MonoBehaviour
 
         }
     */
-    }
-
-    void checkAnimation()
-    {
-        
     }
 }

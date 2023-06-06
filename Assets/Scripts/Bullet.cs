@@ -11,6 +11,31 @@ public class Bullet : MonoBehaviour
     private int firedByLayer;
     private float lifeTimer;
 
+    [SerializeField] private GameObject gunType;
+    [SerializeField] private int clipSize;
+    [SerializeField] private float gunPhysicalImpactDamageValue;
+    [SerializeField] private float gunProjectileImpactDamageValue;
+
+
+    void Start()
+    {
+        //Placeholder names.
+        if (this.name == "Enemy0")
+        {
+            gunPhysicalImpactDamageValue = .1f;
+            gunProjectileImpactDamageValue = .1f;
+        }
+        if (this.name == "Enemy1")
+        {
+            gunPhysicalImpactDamageValue = .1f;
+            gunProjectileImpactDamageValue = .1f;
+        }
+        if (this.name == "Enemy2")
+        {
+            gunPhysicalImpactDamageValue = .1f;
+            gunProjectileImpactDamageValue = .1f;
+        }
+    }
 
     void Update()
     {
@@ -41,8 +66,15 @@ public class Bullet : MonoBehaviour
     private void Hit(Vector3 position, Vector3 direction, Vector3 reflected, Collider collider)
     {
         // Do something here with the object that was hit (collider), e.g. collider.gameObject 
-
-        Destroy(gameObject);
+        if( collider.gameObject.tag == "Enemy")
+        {
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
 
     }
 
@@ -57,4 +89,6 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(vop, Vector3.forward);
 
     }
+
+
 }
