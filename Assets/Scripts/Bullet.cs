@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * Base functions of weapons will be defined in this class.
+ */
 public class Bullet : MonoBehaviour
 {
     public float velocity = 20f;
@@ -11,30 +15,12 @@ public class Bullet : MonoBehaviour
     private int firedByLayer;
     private float lifeTimer;
 
-    [SerializeField] private GameObject gunType;
-    [SerializeField] private int clipSize;
-    [SerializeField] private float gunPhysicalImpactDamageValue;
-    [SerializeField] private float gunProjectileImpactDamageValue;
+    private Animator animationsPlayer;
 
 
     void Start()
     {
-        //Placeholder names.
-        if (this.name == "Enemy0")
-        {
-            gunPhysicalImpactDamageValue = .1f;
-            gunProjectileImpactDamageValue = .1f;
-        }
-        if (this.name == "Enemy1")
-        {
-            gunPhysicalImpactDamageValue = .1f;
-            gunProjectileImpactDamageValue = .1f;
-        }
-        if (this.name == "Enemy2")
-        {
-            gunPhysicalImpactDamageValue = .1f;
-            gunProjectileImpactDamageValue = .1f;
-        }
+
     }
 
     void Update()
@@ -43,7 +29,6 @@ public class Bullet : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, velocity * Time.deltaTime, ~(1 << firedByLayer)))
         {
-            Debug.Log("Hit!");
             transform.position = hit.point;
             Vector3 reflected = Vector3.Reflect(transform.forward, hit.normal);
             Vector3 direction = transform.forward;
@@ -66,16 +51,14 @@ public class Bullet : MonoBehaviour
     private void Hit(Vector3 position, Vector3 direction, Vector3 reflected, Collider collider)
     {
         // Do something here with the object that was hit (collider), e.g. collider.gameObject 
-        if( collider.gameObject.tag == "Enemy")
+        if (collider.gameObject.name.Equals("Enemy"))
         {
-            
+            Debug.Log("Enemy Hit");
         }
         else
         {
             Destroy(gameObject);
         }
-        
-
     }
 
     public void Fire(Vector3 position, Vector3 euler, int layer)
@@ -89,6 +72,4 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(vop, Vector3.forward);
 
     }
-
-
 }

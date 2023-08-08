@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
     public float recoilTimer, recoilDuration = .25f, recoilMaxrotation = 45f;
     [SerializeField] private Transform rightLowerArm, rightHand;
 
+    [SerializeField] private int gunInPlace, ammoCount = 12;
+
+    public String[] guns = { "Pistol", "Shotgun", "Assault Rifle" };
+    public int[] gunAmmoCount = { 12, 6, 30 };
+
 
     void Start()
     {
@@ -51,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         ProjectileShooting();
+        Reload();
     }
 
 
@@ -125,11 +132,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Fire()
     {
-        recoilTimer = Time.time;
-        var go = Instantiate(bulletPrefab);
-        go.transform.position = muzzleTransform.position;
-        var bullet = go.GetComponent<Bullet>();
-        bullet.Fire(go.transform.position, muzzleTransform.eulerAngles, gameObject.layer);
+        if(ammoCount > 0)
+        {
+            recoilTimer = Time.time;
+            var go = Instantiate(bulletPrefab);
+            go.transform.position = muzzleTransform.position;
+            var bullet = go.GetComponent<Bullet>();
+            bullet.Fire(go.transform.position, muzzleTransform.eulerAngles, gameObject.layer);
+            ammoCount -= 1;
+        }
+        else
+        {
+            Debug.Log("Press R to reload.");
+        }
+        
     }
 
     void WeaponAim()
@@ -215,5 +231,29 @@ public class PlayerMovement : MonoBehaviour
 
         }
     */
+    }
+    public void Reload()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            if (ammoCount == 0)
+            {
+                //animationsPlayer.SetBool("reloading", true);
+                ammoCount = gunAmmoCount[0]; //Should be gunInPlace but will use default pistol setting as weapon system isn't yet developed.
+            }
+            if (ammoCount <= (12 / 2)) //12 is temporary value as weapon system is developed where Unity identifies what weapon is being held.
+            {
+                //animationsPlayer.SetBool("reloading", true);
+                ammoCount = gunAmmoCount[0];
+            }
+            else
+            {
+                /* Reloading is denied and a voice-clip says how it'll be stupid to be wasteful when she still has more than hald a clip in.
+                * This means denying the player a basic action which would be annoying, still needs more pondering whether to follow through this idea,
+                * or let the player reload as much as they want.
+                */
+            }
+        }
+
     }
 }

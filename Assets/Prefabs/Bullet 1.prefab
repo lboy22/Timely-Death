@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3714936309704300846}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 3714936309755222210}
   m_Layer: 0
   m_Name: Bullet 1
-  m_TagString: Untagged
+  m_TagString: Pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,3 +253,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 20
   life: 1
+  gunInPlace: 0
+  ammoCount: 0
+  damageOutput: 0
+  shootingDelay: 0
+  guns:
+  - Pistol
+  - Shotgun
+  - Assault Rifle
+  gunProjectileDamage:
+  - 0.5
+  - 0.6
+  - 0.3
+  gunAmmoCount: 0c000000060000001e000000
+  gunShootingDelay:
+  - 0.4
+  - 0.1
+  - 1

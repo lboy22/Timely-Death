@@ -263,6 +263,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 20
   life: 1
+  ammoCount: 8
+  gunInPlace: 0
+  damageOutput: 0
+  shootingDelay: 0
+  guns:
+  - Pistol
+  - Shotgun
+  - Assault Rifle
+  gunProjectileDamage:
+  - 0.2
+  - 0.6
+  - 0.3
+  gunAmmoCount: 0c000000060000001e000000
+  gunShootingDelay:
+  - 0.4
+  - 0.1
+  - 1
 --- !u!96 &9057819295621717276
 TrailRenderer:
   serializedVersion: 2
