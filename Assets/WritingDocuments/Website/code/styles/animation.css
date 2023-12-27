@@ -1,0 +1,118 @@
+#cf3 {
+  position:relative;
+  height:281px;
+  width:450px;
+}
+
+#cf3 img {
+	height:300px;
+	width:450px;
+	position:absolute;
+	left:0;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
+}
+
+ @keyframes cf3FadeInOut {
+	0% {
+		opacity:1;
+	}
+	25%{
+		opacity:1;
+	}
+	50%{
+		opacity:1;
+	}
+	75%{
+		opacity:0;
+	}
+	100% {
+		opacity:0;
+	}
+}
+
+#cf3 img.top {
+animation-name: cf3FadeInOut;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+animation-duration: 5s;
+animation-direction: normal;
+}
+
+#cf3 img.bottom {
+animation-name: cf3FadeInOut;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+animation-duration: 5s;
+animation-direction: normal;
+}
+
+#cf3 img.left {
+animation-name: cf3FadeInOut;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+animation-duration: 5s;
+animation-direction: normal;
+}
+
+#cf3 img.right {
+animation-name: cf3FadeInOut;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+animation-duration: 5s;
+animation-direction: normal;
+}
+
+.as{
+	height: 450px;
+	width: auto;
+}
+
+@-webkit-keyframes changeBg{
+	0%   {background-image: url("Julius.jpg");}
+    25%   {background-image: url("Augustus.jpg");}
+    50%   {background-image: url("Augustus2.jpg");}
+    100%   {background-image: url("Commodus.jpg");}
+}
+body{
+	-webkit-animation:changeBg 30s infinite; 
+}
+
+/*
+p#cf7_controls {
+  text-align:center;
+}
+#cf7_controls span {
+  padding-right:2em;
+  cursor:pointer;
+}
+#cf7 {
+  position:relative;
+  height:281px;
+  width:450px;
+  margin:0 auto 10px;
+}
+#cf7 img {
+	padding-top: 10px;
+  position:relative;
+  height:300px;
+  width:450px;
+  margin:0 auto;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  opacity:0;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+
+#cf7 img.opaque {
+  opacity:1;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=1);
+}
+*/

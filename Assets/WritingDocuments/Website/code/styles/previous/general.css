@@ -1,0 +1,31 @@
+.{
+
+	box-sizing: border-box;
+}
+
+
+header{
+	height: 40px;
+}
+
+.section{
+	width: 102%;
+	margin-left: -2%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color:white;
+}
+
+.content{
+	margin-left: 2%;
+	margin-right: 2%;
+	border-spacing: 10%;
+	background-color: white;
+}
+
+
+body{
+	width: 100%;
+}
+

@@ -1,0 +1,43 @@
+.navigationBar{
+	color: gray;
+	display: flex;
+	position: relative;
+	align-items: center;
+	background-color:white;
+	justify-content: space-beteen;
+}
+
+.navigationBar-links{
+	height: 100%;
+}
+
+.navigationBar-links ul{
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+.navigationBar-links li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+}
+
+.toggle-button{
+	position: absolute;
+	top: .75rem;
+	right: 1rem;
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 30px;
+	height: 21px;
+}
+
+.toggle-button .bar{
+	height: 3px;
+	width: 100%;
+	background-color: white;
+	border-radius: 10px;
+}

@@ -1,0 +1,56 @@
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+body{
+		background-color: #F09A9D; /* Red */
+	}
+
+		.navigationBar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .toggle-button {
+        display: flex;
+    }
+
+    .navigationBar-links {
+        
+        width: 100%;
+    }
+
+    .navigationBar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navigationBar-links ul li {
+        text-align: center;
+    }
+
+    .navigationBar-links ul li a {
+        padding: .5rem 1rem;
+    }
+
+    .navigationBar-links.active {
+        display: flex;
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 1460px) {
+body{
+		background-color: #F5CF8E; /* Yellow */
+	}
+		header{
+		height: 0%;
+	}
+	   
+
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 1462px) {
+body{
+		background-color: #B2D6FF; /* Blue */
+	}
+}
