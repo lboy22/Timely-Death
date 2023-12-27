@@ -11,12 +11,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform targetTransform;
     public Transform muzzleTransform;
 
-
-    //float JumpHeight = 3f;
     private Animator animationsPlayer;
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float dashDistance = 5f;
+
+    [SerializeField] private float speed = 0.5f;
+    [SerializeField] private float dashDistance;
     [SerializeField] private float groundDistance = 0.2f;
+
+    [SerializeField] Transform groundCheck;
 
     private bool aimState;
     private Rigidbody body;
@@ -24,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = true;
     private Transform groundChecker;
     private Vector3 inputs = Vector3.zero;
+
+    [SerializeField] private float dashingVelocity = 2f;
+    [SerializeField] private float dashingTime = 0.5f;
+    [SerializeField] private Vector3 dashingDirection;
+    [SerializeField] private bool isDashing;
+    [SerializeField] private bool canDash;
 
     [SerializeField] private AnimationCurve recoilCurve;
     public float recoilTimer, recoilDuration = .25f, recoilMaxrotation = 45f;
@@ -89,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
     {
         HorizontalMovement();
         Dash();
-
     }
 
     void HorizontalMovement()
@@ -122,7 +128,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         /*
-         * Byllet should follow a random path between 75 and -75 degrees.
+         * Bullet should follow a random path between 75 and -75 degrees.
+         * Still needs to be applied.
          */
         else if(!aimState && Input.GetButtonDown("Fire1"))
         {
@@ -203,6 +210,37 @@ public class PlayerMovement : MonoBehaviour
      */
     void Dash()
     {
+
+        if(Input.GetButtonDown("Dash") && canDash)
+        {
+            isDashing = true;
+            canDash = false;
+
+            dashingDirection = new Vector3(inputs.x, Input.GetAxisRaw("Vertical"), 0);
+
+            if(dashingDirection == Vector3.zero)
+            {
+                dashingDirection = new Vector3(transform.localScale.x, 0, 0);
+            }
+            StartCoroutine(StopDashing());
+        }
+
+        //Dashing animation.
+        //animationsPlayer.SetBool("dash", true);
+
+
+        if (isDashing)
+        {
+            body.velocity = dashingDirection.normalized * dashingVelocity;
+            return;
+        }
+
+        if(isGrounded)
+        {
+            canDash = true;
+        }
+
+        /*
         if (Input.GetButtonDown("Dash"))
         {
             Vector3 dashVelocity = Vector3.Scale(transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * body.drag + 1)) / 
@@ -210,9 +248,9 @@ public class PlayerMovement : MonoBehaviour
             
             //Should be dashVelocity but it currently calculating as 0,0,0. Analyse and fix.
             body.AddForce(dashDistance, 0, 0, ForceMode.VelocityChange);
-            Debug.Log("Dash pressed. - " + dashDistance);
+            Debug.Log("Dash pressed. - " + dashVelocity);
         }
-
+        */
      /*       
          * Make player speed increase the longer the designated key is pressed,
          * or as long as there's stamina available (system yet to be immplemented).
@@ -232,6 +270,13 @@ public class PlayerMovement : MonoBehaviour
         }
     */
     }
+
+    private IEnumerator StopDashing()
+    {
+        yield return new WaitForSeconds(dashingTime);
+        isDashing = false;
+    }
+
     public void Reload()
     {
         if (Input.GetKey(KeyCode.R))
@@ -248,7 +293,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                /* Reloading is denied and a voice-clip says how it'll be stupid to be wasteful when she still has more than hald a clip in.
+                /* Reloading is denied and a voice-clip says how it'll be stupid to be wasteful when she still has more than half a clip in.
                 * This means denying the player a basic action which would be annoying, still needs more pondering whether to follow through this idea,
                 * or let the player reload as much as they want.
                 */

@@ -18,7 +18,8 @@ public class Enemy : MonoBehaviour
         {
             healthValue = 8;
         }
-        
+              
+/*      This will used to declare future enemies once the baisc structure of one has been developed.
         else if(CompareTag("Enemy1"))
         {
             healthValue = 10;
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour
         {
             healthValue = 12;
         }
-
+*/
     }
 
     // Update is called once per frame
